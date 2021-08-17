@@ -42,7 +42,7 @@
         state: present
         map_public: yes
         tags:
-          name: vprofile-pubsubnet2
+          Name: vprofile-pubsubnet2
       register: pubsub2_out
 
     - name: creating the public subnet3
@@ -54,7 +54,7 @@
         map_public: yes
         state: present
         tags:
-          name: vprofile-pubsubnet3
+          Name: vprofile-pubsubnet3
       register: pubsub3_out
 
     - name: creating the pirvate subnet1
@@ -65,7 +65,7 @@
         cidr: "{{prisub1cidr}}"
         state: present
         tags:
-          name: vprofile-prisubnet1
+          Name: vprofile-prisubnet1
       register: prisub1_out
 
     - name: creating the private subnet2
@@ -76,7 +76,7 @@
         cidr: "{{prisub2cidr}}"
         state: present
         tags:
-          name: vprofile-prisubnet2
+          Name: vprofile-prisubnet2
       register: prisub2_out
 
     - name: creating the private subnet3
@@ -87,7 +87,7 @@
         cidr: "{{prisub3cidr}}"
         state: present
         tags:
-          name: vprofile-prisubnet3
+          Name: vprofile-prisubnet3
       register: prisub3_out
 
     - name: creating the internet gateway
@@ -95,7 +95,7 @@
         vpc_id: "{{vpcout.vpc.id}}"
         region: "{{region}}"
         tags:
-          name: vprofile-igw
+          Name: vprofile-igw
       register: igw_out
 
     - name: creating the public route table

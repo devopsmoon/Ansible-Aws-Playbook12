@@ -94,7 +94,6 @@
       ec2_vpc_igw:
         vpc_id: "{{vpcout.vpc.id}}"
         region: "{{region}}"
-        state: present
         tags:
           name: vprofile-igw
       register: igw_out
@@ -103,6 +102,7 @@
       ec2_vpc_route_table:
         vpc_id: "{{vpcout.vpc.id}}"
         region: "{{region}}"
+        state: present
         subnets:
           - "{{pubsub1_out.subnet.id}}"
           - "{{pubsub2_out.subnet.id}}"
@@ -126,6 +126,7 @@
       ec2_vpc_route_table:
         vpc_id: "{{vpcout.vpc.id}}"
         region: "{{region}}"
+        state: present
         subnets:
           - "{{prisub1_out.subnet.id}}"
           - "{{prisub2_out.subnet.id}}"

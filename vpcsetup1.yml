@@ -54,7 +54,7 @@
         map_public: yes
         state: present
         tags:
-          Name: vprofile-pubsubnet3
+          name: vprofile-pubsubnet3
       register: pubsub3_out
 
     - name: creating the pirvate subnet1
@@ -65,7 +65,7 @@
         cidr: "{{prisub1cidr}}"
         state: present
         tags:
-          Name: vprofile-prisubnet1
+          name: vprofile-prisubnet1
       register: prisub1_out
 
     - name: creating the private subnet2
@@ -110,6 +110,8 @@
         routes:
           - dest: 0.0.0.0/0
             gateway_id: "{{igw_out.gateway_id}}"
+        tags:
+          name: vprofile-pubrt
       register: pubrt_out
 
     - name: creating the nat gateway
@@ -134,6 +136,8 @@
         routes:
           - dest: 0.0.0.0/0
             gateway_id: "{{natgw_out.nat_gateway_id}}"
+        tags:
+          name: vprofile-prirt
       register: prirt_out
 
     - debug:

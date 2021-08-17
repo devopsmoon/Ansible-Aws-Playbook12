@@ -66,4 +66,13 @@
           owner: devopsteam
         group_id: "{{bastionsg_out.group_id}}"
         vpc_subnet_id: "{{pubsub1id}}"
-      register: bastiohost_out
+      register: bastionhost_out
+
+    - name: Insert or update bastionhostid in vpc-output.var file
+      blockinfile:
+        path: vars/vpc-output.var
+        backup: yes
+        block: |
+          bastionsgid: "{{bastionsg_out.group_id}}"
+
+

@@ -1,0 +1,79 @@
+- name: creating the playbook for ec2_instances
+  hosts: localhost
+  become: true
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: importing the variables files
+      include_vars: vars/vpc_setup
+
+    - name: importing ghe variable files1
+      include_vars: vars/Bastion_setup
+
+    - name: importing the variables files2
+      include_vars: vars/vpc-output.var
+
+    - name: importing the variables files3
+      include_vars: vars/vprofile-stack_setup
+
+    - name: creating the ec2 key pair for instances
+      ec2_key:
+        name: login-key
+        region: "{{region}}"
+        state: present
+      register: keyout
+
+    - debug:
+        var: keyout
+
+    - name: saving the key pair for instance
+      copy:
+        content: "{{keyout.key.private_key}}"
+        dest: "./login-key.pem"
+        mode: 0600
+      when: keyout.changed
+
+    - name: creating the security group for load balancer
+      ec2_group:
+        name: vprofile-ELB
+        description: allow port 80 from any where
+        region: "{{region}}"
+        vpc_id: "{{vpcoutid}}"
+        state: present
+        rules:
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip:
+      register: vproelb-sg_out
+
+    - name: creating the security group for vprofile-stack
+      ec2_group:
+        name: vprofile-stack
+        description: allow port 80 from any where
+        region: "{{region}}"
+        vpc_id: "{{vpcoutid}}"
+        state: present
+        purge_rules: no
+        rules:
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            group_id: "{{vproelb-sg_out}}"
+
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            group_id: "{{bastionsgid}}"
+      register: vprofile-stack_out
+
+    - name: creating the security group to allow its own traffic
+      ec2_group:
+        name: vprofile
+        description: allow all traffic from its own traffic
+        vpc_id: "{{vpcoutid}}"
+        region: "{{region}}"
+        purge_rules: no
+        rules:
+          - proto: all
+            group_id:

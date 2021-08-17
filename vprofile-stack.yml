@@ -65,7 +65,7 @@
             from_port: 22
             to_port: 22
             group_id: "{{bastionsgid}}"
-      register: vprofile-stack_out
+      register: vprofilestack_out
 
     - name: creating the security group to allow its own traffic
       ec2_group:
@@ -76,5 +76,5 @@
         purge_rules: no
         rules:
           - proto: all
-            group_id: "{{vprofile-stack_out.group_id}}"
+            group_id: "{{vprofilestack_out.group_id}}"
 

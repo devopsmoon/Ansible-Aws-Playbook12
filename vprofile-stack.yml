@@ -44,7 +44,7 @@
           - proto: tcp
             from_port: 80
             to_port: 80
-            cidr_ip:
+            cidr_ip: 0.0.0.0/0
       register: vproelb-sg_out
 
     - name: creating the security group for vprofile-stack

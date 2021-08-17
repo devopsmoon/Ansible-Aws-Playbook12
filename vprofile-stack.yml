@@ -45,7 +45,7 @@
             from_port: 80
             to_port: 80
             cidr_ip: 0.0.0.0/0
-      register: vproelb-sg_out
+      register: vproelbsg_out
 
     - name: creating the security group for vprofile-stack
       ec2_group:
@@ -59,7 +59,7 @@
           - proto: tcp
             from_port: 80
             to_port: 80
-            group_id: "{{vproelb-sg_out.group_id}}"
+            group_id: "{{vproelbsg_out.group_id}}"
 
           - proto: tcp
             from_port: 22

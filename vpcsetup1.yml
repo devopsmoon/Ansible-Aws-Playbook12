@@ -111,7 +111,7 @@
           - dest: 0.0.0.0/0
             gateway_id: "{{igw_out.gateway_id}}"
         tags:
-          name: vprofile-pubrt
+          Name: vprofile-pubrt
       register: pubrt_out
 
     - name: creating the nat gateway
@@ -137,7 +137,7 @@
           - dest: 0.0.0.0/0
             gateway_id: "{{natgw_out.nat_gateway_id}}"
         tags:
-          name: vprofile-prirt
+          Name: vprofile-prirt
       register: prirt_out
 
     - debug:

@@ -2,7 +2,7 @@ vpcoutid: vpc-0bbb43245225476ff
 pubsub1id: subnet-04258f6550e4f4a42
 pubsub2id: subnet-08fc34258f79243c1
 pubsub3id: subnet-0d6b58bf81b01ba13
- prisub1id: subnet-0fac12addd781bf8e
+prisub1id: subnet-0fac12addd781bf8e
 prisub2id: subnet-00530303b36d7b1f5
 prisub3id: subnet-0580dc9057bb96aaf
 igwid: igw-0361bd28c771db199

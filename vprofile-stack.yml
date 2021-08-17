@@ -69,11 +69,12 @@
 
     - name: creating the security group to allow its own traffic
       ec2_group:
-        name: vprofile
+        name: vprofile-stack
         description: allow all traffic from its own traffic
-        vpc_id: "{{vpcoutid}}"
         region: "{{region}}"
+        vpc_id: "{{vpcoutid}}"
         purge_rules: no
         rules:
           - proto: all
-            group_id:
+            group_id: "{{vprofile-stack_out.group_id}}"
+
